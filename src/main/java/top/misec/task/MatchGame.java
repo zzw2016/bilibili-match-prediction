@@ -31,8 +31,8 @@ public class MatchGame implements Task {
         int ps=50;
         String gid="";
         String sids="";
-      //  String today=getTime();
-        String today="2021-03-21";
+        String today=getTime();
+       // String today="2021-03-21";
         log.info(today);
         String urlParam="?pn="+pn+
                 "&ps="+ps
