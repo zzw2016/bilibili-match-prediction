@@ -53,39 +53,50 @@ public class MatchGame implements Task {
 
             if (list != null) {
                 int coinNumber=5;
-                int contsetid;
+                int contsetId;
                 String contestName;
                 int questionId;
                 String questionTitle;
-                int teamid;
-                String teamname;
+                int teamId;
+                String teamName;
+                int seasonId;
+                String seasonName;
 
                 for (JsonElement listinfo : list) {
                     log.info("-----预测开始-----");
                     JsonObject contestJson= listinfo.getAsJsonObject().getAsJsonObject("contest");
                     JsonObject questionJson= listinfo.getAsJsonObject().getAsJsonArray("questions")
                             .get(0).getAsJsonObject();
-                    contsetid=contestJson.get("id").getAsInt();
+                    contsetId=contestJson.get("id").getAsInt();
                     contestName=contestJson.get("game_stage").getAsString();
                     questionId=questionJson.get("id").getAsInt();
                     questionTitle=questionJson.get("title").getAsString();
+                    seasonId=contestJson.get("season").getAsJsonObject()
+                            .get("id").getAsInt();
+                    seasonName=contestJson.get("season").getAsJsonObject()
+                            .get("title").getAsString();
 
-                    log.info(contestName+":"+questionTitle);
+                    log.info(seasonName+" "+contestName+":"+questionTitle);
+
+                    if(questionJson.get("is_guess").getAsInt()==1){
+                        log.info("此问题已经参与过预测了，无需再次预测");
+                        continue;
+                    }
                     JsonObject teamA=questionJson.get("details").getAsJsonArray().get(0).getAsJsonObject();
                     JsonObject teamB=questionJson.get("details").getAsJsonArray().get(1).getAsJsonObject();
 
 
                     log.info("当前赔率为:  {}:{}",teamA.get("odds").getAsDouble(),teamB.get("odds").getAsDouble());
                     if(teamA.get("odds").getAsDouble()>=teamB.get("odds").getAsDouble()){
-                        teamid=teamB.get("detail_id").getAsInt();
-                        teamname=teamB.get("option").getAsString();
+                        teamId=teamB.get("detail_id").getAsInt();
+                        teamName=teamB.get("option").getAsString();
                     }else{
-                        teamid=teamA.get("detail_id").getAsInt();
-                        teamname=teamA.get("option").getAsString();
+                        teamId=teamA.get("detail_id").getAsInt();
+                        teamName=teamA.get("option").getAsString();
                     }
 
-                    log.info("拟预测的队伍是:{},预测硬币数为:{}",teamname,coinNumber);
-                    doPrediction(contsetid,questionId,teamid,coinNumber);
+                    log.info("拟预测的队伍是:{},预测硬币数为:{}",teamName,coinNumber);
+                    doPrediction(contsetId,questionId,teamId,coinNumber);
                     taskSuspend();
 
                 }
