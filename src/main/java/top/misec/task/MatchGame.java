@@ -32,7 +32,7 @@ public class MatchGame implements Task {
         String gid="";
         String sids="";
         String today=getTime();
-       // String today="2021-03-21";
+        //String today="2021-03-20";
         log.info(today);
         String urlParam="?pn="+pn+
                 "&ps="+ps
@@ -127,7 +127,7 @@ public class MatchGame implements Task {
         if(result.get("code").getAsInt()!=0){
             log.info(result.get("message").getAsString());
         }else {
-            log.info(result.get("message").getAsString());
+            log.info("预测成功");
         }
 
     }

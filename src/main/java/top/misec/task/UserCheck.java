@@ -37,7 +37,7 @@ public class UserCheck implements Task {
             if (userJson.get(STATUS_CODE_STR).getAsInt() == 0
                     && userJson.get("data").getAsJsonObject().get("isLogin").getAsBoolean()) {
                 log.info("Cookies有效，获取预测信息成功");
-                log.info("预测总场数:{}",matchInfo.get("total_success").getAsInt());
+                log.info("预测总场数:{}",matchInfo.get("total_guess").getAsInt());
                 log.info("预测胜场数:{}",matchInfo.get("total_success").getAsInt());
                 log.info("预测胜率:{}%",matchInfo.get("success_rate").getAsDouble());
                 log.info("预测总投入:{}硬币",matchInfo.get("total_stake").getAsInt());
