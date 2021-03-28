@@ -68,12 +68,12 @@ bilibili-match-prediction
 
 ![图示](docs/IMG/workflow_dispatch.png)
 
-**Fork 仓库后，GitHub 默认不自动执行 Actions 任务，请修改 `.github/trigger.json` 文件,将 `trigger` 的值改为 `1`，这样每天就会自动执行定时任务了。**
+**Fork 仓库后，默认不自动执行 Actions 任务，请修改 `src/resources/config.json` 文件,将 `skipDailyTask` 的值改为 `false`，这样每天就会自动执行定时任务了。**
 
 ```patch
 {
-- "trigger": 0
-+ "trigger": 1
+- "skipDailyTask": true
++ "skipDailyTask": false
 }
 ```
 

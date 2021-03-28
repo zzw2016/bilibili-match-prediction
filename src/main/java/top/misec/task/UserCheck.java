@@ -1,11 +1,8 @@
 package top.misec.task;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import lombok.extern.log4j.Log4j2;
 import top.misec.apiquery.ApiList;
-import top.misec.pojo.userinfobean.Data;
-import top.misec.utils.HelpUtil;
 import top.misec.utils.HttpUtil;
 
 import static top.misec.task.TaskInfoHolder.STATUS_CODE_STR;
@@ -19,8 +16,6 @@ import static top.misec.task.TaskInfoHolder.STATUS_CODE_STR;
  */
 @Log4j2
 public class UserCheck implements Task {
-
-    private final String taskName = "登录检查";
 
     @Override
     public void run() {
@@ -58,6 +53,7 @@ public class UserCheck implements Task {
 
     @Override
     public String getName() {
+        String taskName = "登录检查";
         return taskName;
     }
 }

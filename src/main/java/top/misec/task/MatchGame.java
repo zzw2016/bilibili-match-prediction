@@ -5,28 +5,31 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import lombok.extern.log4j.Log4j2;
-import org.apache.http.client.utils.URLEncodedUtils;
 import top.misec.apiquery.ApiList;
 import top.misec.apiquery.oftenAPI;
+import top.misec.config.Config;
 import top.misec.login.Verify;
 import top.misec.utils.HttpUtil;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
+/**
+ * @author junzhou
+ */
 @Log4j2
 public class MatchGame implements Task {
 
     @Override
-    public void run() throws UnsupportedEncodingException, InterruptedException {
+    public void run() throws InterruptedException {
 
-        if(oftenAPI.getCoinBalance()<30){
-            log.info("30个硬币都没有，参加什么预测呢？任务结束");
+        if(oftenAPI.getCoinBalance()<Config.getInstance().getMinimumNumberOfCoins()){
+            log.info("{}个硬币都没有，参加什么预测呢？任务结束",Config.getInstance().getMinimumNumberOfCoins());
             return;
         }
+
         int pn=1;
         int ps=50;
         String gid="";
@@ -52,8 +55,8 @@ public class MatchGame implements Task {
             JsonObject pageinfo=jsonObject.get("page").getAsJsonObject();
 
             if (list != null) {
-                int coinNumber=5;
-                int contsetId;
+                int coinNumber= Config.getInstance().getPredictNumberOfCoins();
+                int contestId;
                 String contestName;
                 int questionId;
                 String questionTitle;
@@ -67,7 +70,7 @@ public class MatchGame implements Task {
                     JsonObject contestJson= listinfo.getAsJsonObject().getAsJsonObject("contest");
                     JsonObject questionJson= listinfo.getAsJsonObject().getAsJsonArray("questions")
                             .get(0).getAsJsonObject();
-                    contsetId=contestJson.get("id").getAsInt();
+                    contestId=contestJson.get("id").getAsInt();
                     contestName=contestJson.get("game_stage").getAsString();
                     questionId=questionJson.get("id").getAsInt();
                     questionTitle=questionJson.get("title").getAsString();
@@ -96,7 +99,7 @@ public class MatchGame implements Task {
                     }
 
                     log.info("拟预测的队伍是:{},预测硬币数为:{}",teamName,coinNumber);
-                    doPrediction(contsetId,questionId,teamId,coinNumber);
+                    doPrediction(contestId,questionId,teamId,coinNumber);
                     taskSuspend();
 
                 }
