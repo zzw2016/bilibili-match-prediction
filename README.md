@@ -33,6 +33,7 @@ bilibili-match-prediction
     - [订阅执行结果](#订阅执行结果)
         - [Server酱Turbo版](#server酱turbo版)
         - [Telegram订阅执行结果](#telegram订阅执行结果)
+        - [PushPlus(Push+)](#pushpluspush)
 
     - [免责声明](#免责声明)
     - [致谢](#致谢)
@@ -122,6 +123,15 @@ bilibili-match-prediction
    ![图示](docs/IMG/img.png)
 
 **旧版推送渠道 [sc.ftqq.com](http://sc.ftqq.com/9.version) 即将与4月底下线，请前往 [sct.ftqq.com](https://sct.ftqq.com/sendkey) 生成`Turbo`版本的`Key`，注意，申请Turbo版Key后请配置消息通道，如果想沿用以前的推送方式，选择方糖服务号即可**
+
+### PushPlus(Push+)
+
+1.[前往PushPlus获取Token](https://www.pushplus.plus/push1.html)
+
+2.在Github Secrets中的SERVERPUSHKEY中更新成获取到的Token
+
+3.完成
+
 
 ### Telegram订阅执行结果
 
