@@ -8,21 +8,20 @@ import top.misec.utils.LoadFileResource;
 @Data
 @Log4j2
 public class Config {
+    private static Config CONFIG = new Config();
     private boolean skipDailyTask;
+    private int predictNumberOfCoins;
+    private int minimumNumberOfCoins;
+
+    public static Config getInstance() {
+        return CONFIG;
+    }
 
     public int getPredictNumberOfCoins() {
         if (predictNumberOfCoins > 10) {
             predictNumberOfCoins = 10;
         }
         return predictNumberOfCoins;
-    }
-
-    private int predictNumberOfCoins;
-    private int minimumNumberOfCoins;
-    private static Config CONFIG = new Config();
-
-    public static Config getInstance() {
-        return CONFIG;
     }
 
     @Override

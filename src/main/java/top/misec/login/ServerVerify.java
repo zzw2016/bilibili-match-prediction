@@ -9,9 +9,9 @@ import lombok.Getter;
 @Getter
 public class ServerVerify {
 
+    private final static ServerVerify SERVER_VERIFY = new ServerVerify();
     private static String FTKEY = null;
     private static String CHATID = null;
-    private final static ServerVerify SERVER_VERIFY = new ServerVerify();
 
     public static void verifyInit(String ftKey) {
         ServerVerify.FTKEY = ftKey;
