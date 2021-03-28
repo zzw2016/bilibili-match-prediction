@@ -7,6 +7,7 @@ import top.misec.config.Config;
 import top.misec.login.ServerVerify;
 import top.misec.login.Verify;
 import top.misec.task.DailyTask;
+import top.misec.task.ServerPush;
 import top.misec.utils.VersionInfo;
 
 @Log4j2
@@ -29,6 +30,7 @@ public class Main {
 
         if (Config.getInstance().isSkipDailyTask()) {
             log.info("已配置跳过本日任务，本次执行将不会发起任何网络请求");
+            ServerPush.doServerPush();
         } else {
             DailyTask dailyTask = new DailyTask();
             dailyTask.doDailyTask();
