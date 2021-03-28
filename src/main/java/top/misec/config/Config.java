@@ -11,8 +11,8 @@ public class Config {
     private boolean skipDailyTask;
 
     public int getPredictNumberOfCoins() {
-        if(predictNumberOfCoins>10){
-            predictNumberOfCoins=10;
+        if (predictNumberOfCoins > 10) {
+            predictNumberOfCoins = 10;
         }
         return predictNumberOfCoins;
     }

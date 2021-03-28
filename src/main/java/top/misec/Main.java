@@ -1,7 +1,6 @@
 package top.misec;
 
 
-import com.google.gson.JsonObject;
 import lombok.extern.log4j.Log4j2;
 import top.misec.config.Config;
 import top.misec.login.ServerVerify;

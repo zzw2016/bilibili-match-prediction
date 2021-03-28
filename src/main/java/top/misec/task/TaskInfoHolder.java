@@ -1,10 +1,7 @@
 package top.misec.task;
 
-import com.google.gson.JsonObject;
 import lombok.extern.log4j.Log4j2;
-import top.misec.apiquery.ApiList;
 import top.misec.pojo.userinfobean.Data;
-import top.misec.utils.HttpUtil;
 
 /**
  * 任务信息持有类
@@ -17,9 +14,6 @@ public class TaskInfoHolder {
 
     public static final String STATUS_CODE_STR = "code";
     public static Data userInfo = null;
-
-
-
 
 
     /**

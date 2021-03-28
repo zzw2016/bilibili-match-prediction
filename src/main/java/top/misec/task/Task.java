@@ -9,7 +9,7 @@ import java.io.UnsupportedEncodingException;
 public interface Task {
 
     /**
-     *任务实现
+     * 任务实现
      */
     void run() throws UnsupportedEncodingException, InterruptedException;
 

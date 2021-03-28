@@ -18,8 +18,6 @@ import org.apache.http.util.EntityUtils;
 import top.misec.login.Verify;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URLEncoder;
 import java.util.Map;
 import java.util.Optional;
 
@@ -93,8 +91,8 @@ public class HttpUtil {
             for (String key : headers.keySet()) {
                 httpPost.setHeader(key, headers.get(key));
             }
-        }else{
-            httpPost.setHeader("Referer", "https://www.bilibili.com/");   
+        } else {
+            httpPost.setHeader("Referer", "https://www.bilibili.com/");
         }
         // 封装post请求参数
 

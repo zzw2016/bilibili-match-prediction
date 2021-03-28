@@ -41,7 +41,6 @@ public class DailyTask {
     }
 
 
-
     private void printTime() {
         Date d = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
