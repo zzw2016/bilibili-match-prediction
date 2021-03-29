@@ -34,7 +34,6 @@ public class UserCheck implements Task {
                 } else {
                     matchInfo = matchInfo.get("guess").getAsJsonObject();
                 }
-
                 log.info("获取预测信息成功");
                 log.info("预测总场数:{}", matchInfo.get("total_guess").getAsInt());
                 log.info("预测胜场数:{}", matchInfo.get("total_success").getAsInt());

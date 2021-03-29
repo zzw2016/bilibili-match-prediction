@@ -29,31 +29,15 @@ public class MatchGame implements Task {
             log.info("{}个硬币都没有，参加什么预测呢？任务结束", Config.getInstance().getMinimumNumberOfCoins());
             return;
         }
-
-        int pn = 1;
-        int ps = 50;
-        String gid = "";
-        String sids = "";
-        String today = getTime();
-        //String today="2021-03-20";
-        log.info(today);
-        String urlParam = "?pn=" + pn +
-                "&ps=" + ps
-                + "&gid=" + gid
-                + "&sids=" + sids
-                + "&stime=" + today + URLEncoder.encode(" 00:00:00")
-                + "&etime=" + today + URLEncoder.encode(" 23:59:59")
-                + "&pn=" + pn
-                + "&ps=" + ps
-                + "&stime=" + today + "+00:00:00"
-                + "&etime=" + today + "+23:59:59";
-
-        JsonObject resultJson = HttpUtil.doGet(ApiList.queryQuestions + urlParam);
+        JsonObject resultJson = queryContestQuestion(getTime(),1,50);
         JsonObject jsonObject = resultJson.get("data").getAsJsonObject();
         if (resultJson.get("code").getAsInt() == 0) {
             JsonArray list = jsonObject.get("list").getAsJsonArray();
             JsonObject pageinfo = jsonObject.get("page").getAsJsonObject();
-
+            if (pageinfo.get("total").getAsInt() == 0) {
+                log.info("今日无赛事或者本日赛事已经截止预测");
+                return;
+            }
             if (list != null) {
                 int coinNumber = Config.getInstance().getPredictNumberOfCoins();
                 int contestId;
@@ -85,11 +69,12 @@ public class MatchGame implements Task {
                         log.info("此问题已经参与过预测了，无需再次预测");
                         continue;
                     }
+
                     JsonObject teamA = questionJson.get("details").getAsJsonArray().get(0).getAsJsonObject();
                     JsonObject teamB = questionJson.get("details").getAsJsonArray().get(1).getAsJsonObject();
 
-
                     log.info("当前赔率为:  {}:{}", teamA.get("odds").getAsDouble(), teamB.get("odds").getAsDouble());
+
                     if (teamA.get("odds").getAsDouble() >= teamB.get("odds").getAsDouble()) {
                         teamId = teamB.get("detail_id").getAsInt();
                         teamName = teamB.get("option").getAsString();
@@ -104,7 +89,6 @@ public class MatchGame implements Task {
 
                 }
             }
-
         } else {
             log.info("获取赛事信息失败");
         }
@@ -116,6 +100,22 @@ public class MatchGame implements Task {
         int sleepTime = (int) ((random.nextDouble() + 0.5) * 3000);
         log.info("-----随机暂停{}ms-----\n", sleepTime);
         Thread.sleep(sleepTime);
+    }
+    private JsonObject queryContestQuestion(String today,int pn,int ps){
+
+        String gid = "";
+        String sids = "";
+        String urlParam = "?pn=" + pn +
+                "&ps=" + ps
+                + "&gid=" + gid
+                + "&sids=" + sids
+                + "&stime=" + today + URLEncoder.encode(" 00:00:00")
+                + "&etime=" + today + URLEncoder.encode(" 23:59:59")
+                + "&pn=" + pn
+                + "&ps=" + ps
+                + "&stime=" + today + "+00:00:00"
+                + "&etime=" + today + "+23:59:59";
+        return HttpUtil.doGet(ApiList.queryQuestions + urlParam);
     }
 
     private void doPrediction(int oid, int main_id, int detail_id, int count) {
@@ -139,8 +139,7 @@ public class MatchGame implements Task {
     private String getTime() {
         Date d = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String time = sdf.format(d);
-        return time;
+        return sdf.format(d);
     }
 
     @Override

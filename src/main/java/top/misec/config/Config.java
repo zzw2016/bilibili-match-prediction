@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.extern.log4j.Log4j2;
 import top.misec.utils.LoadFileResource;
 
+/**
+ * @author junzhou
+ */
 @Data
 @Log4j2
 public class Config {
@@ -33,7 +36,7 @@ public class Config {
                 '}';
     }
 
-    public void ConfigInit() {
+    public void configInit() {
         String configJson = null;
         String outConfig = LoadFileResource.loadConfigJsonFromFile();
         if (outConfig != null) {

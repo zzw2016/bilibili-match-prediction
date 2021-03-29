@@ -9,6 +9,9 @@ import top.misec.task.DailyTask;
 import top.misec.task.ServerPush;
 import top.misec.utils.VersionInfo;
 
+/**
+ * @author junzhou
+ */
 @Log4j2
 public class Main {
     public static void main(String[] args) {
@@ -25,7 +28,7 @@ public class Main {
             ServerVerify.verifyInit(args[3]);
         }
 
-        Config.getInstance().ConfigInit();
+        Config.getInstance().configInit();
 
         if (Config.getInstance().isSkipDailyTask()) {
             log.info("已配置跳过本日任务，本次执行将不会发起任何网络请求");

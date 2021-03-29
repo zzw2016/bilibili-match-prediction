@@ -36,7 +36,7 @@ public class DailyTask {
         } catch (InterruptedException | UnsupportedEncodingException e) {
             e.printStackTrace();
         } finally {
-            ServerPush.doServerPush();
+           // ServerPush.doServerPush();
         }
     }
 
