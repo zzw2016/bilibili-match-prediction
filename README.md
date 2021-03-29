@@ -117,7 +117,7 @@ bilibili-match-prediction
 - 方糖服务号
 
 1. 前往 [sct.ftqq.com](https://sct.ftqq.com/sendkey) 点击登入，创建账号。
-2. 点击点[SendKey](https://sct.ftqq.com/sendkey) ，生成一个 Key。将其增加到 Github Secrets 中，变量名为 `SERVERPUSHKEY`
+2. 点击点[SendKey](https://sct.ftqq.com/sendkey) ，生成一个 Key。将其增加到 Github Secrets 中，变量名为 `SCKEY`
 3. [配置消息通道](https://sct.ftqq.com/forward) ，选择方糖服务号，保存即可。
 4. 推送效果展示
    ![图示](docs/IMG/img.png)
@@ -128,7 +128,7 @@ bilibili-match-prediction
 
 1.[前往PushPlus获取Token](https://www.pushplus.plus/push1.html)
 
-2.在Github Secrets中的SERVERPUSHKEY中更新成获取到的Token
+2.在Github Secrets中的SCKEY参数更新成获取到的Token
 
 3.完成
 
